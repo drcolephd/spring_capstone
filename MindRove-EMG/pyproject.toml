@@ -1,0 +1,97 @@
+[project]
+name = "nml_wtf_mindrove"
+description = "NML MindRove EMG tools, GUI apps, real-time decoding, and vendored MindRove Python drivers."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+authors = [
+    { name = "Neuro-Mechatronics Interfaces (NML)", email = "info@nml.wtf" }
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+    "Topic :: System :: Hardware :: Universal Serial Bus (USB)",
+    "Intended Audience :: Science/Research",
+    "Development Status :: 3 - Alpha"
+]
+
+dynamic = ["version"]
+
+dependencies = [
+    "PyQt5==5.15.7",
+    "PyQt5-Qt5==5.15.2",
+    "PyQt5-sip==12.11.0",
+    "pyqtgraph==0.12.4", 
+    "numba==0.61.0",
+    "numpy==1.26.4",
+    "nptyping==2.5.0", 
+    "matplotlib==3.9.2",
+    "mindrove==5.2.3", 
+    "scipy==1.14.1",
+    "scikit-learn==1.5.2",
+    "hidapi==0.14.0.post4",
+    "colorama==0.4.6",
+    "contourpy==1.3.0",
+    "cycler==0.12.1",
+    "joblib==1.4.2",
+    "keyboard==0.13.5",
+    "kiwisolver==1.4.7",
+    "llvmlite==0.44.0",
+    "pandas==2.2.3",
+    "pillow==11.0.0",
+    "pyserial==3.5",
+    "pluggy==1.5.0",
+    "psutil==7.0.0",
+    "pytest==8.3.4",
+    "python-dateutil==2.9.0.post0",
+    "pylsl==1.17.6",
+    "pynput==1.8.1",
+    "pyparsing==3.2.0",
+    "six==1.16.0",
+    "threadpoolctl==3.5.0",
+    "typish==1.9.3",
+    "tzdata==2024.2",
+    "websockets==15.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "mypy",
+    "ruff",
+]
+
+[project.urls]
+Homepage = "https://github.com/Neuro-Mechatronics-Interfaces/MindRove-EMG"
+Repository = "https://github.com/Neuro-Mechatronics-Interfaces/MindRove-EMG"
+
+[build-system]
+requires = ["setuptools>=61","setuptools_scm[toml]>=8","wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = { find = { where = ["."], include = ["nml", "test", "demo", "tool", "test", "assets", "lib", "configurations"] } }
+
+[tool.setuptools.package-data]
+"assets" = ["*.png", "*.ico", "*.svg"]
+"lib" = ["*.dll", "*.lib", "*.exp", "*.obj"]
+"configurations" = ["*.xml", "*.tsv"]
+
+[tool.setuptools_scm]
+write_to = "nml/_version.py"
+fallback_version = "1.0.3"
+
+[tool.setuptools.exclude-package-data]
+"*" = ["data/*", "models/*"]
+
+[project.scripts]
+nwm-gui = "nml.main:main"
+nwm-demo-stretch = "demo.lsl_stretch:main"
+nwm-demo-latch = "demo.vigem_latch:main"
+nwm-imu-reader = "nml.imu_serial_reader:main"

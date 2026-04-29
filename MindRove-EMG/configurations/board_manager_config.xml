@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<board_manager_config>
+    <assertion_debounce>500</assertion_debounce>
+    <deassertion_debounce>500</deassertion_debounce>
+    <assertion_threshold>0.0010</assertion_threshold>
+    <deassertion_threshold>0.04</deassertion_threshold>
+    <power_threshold>5000000</power_threshold>
+    <orientation_threshold>0.1</orientation_threshold>
+    <update_mode>8</update_mode>
+</board_manager_config>

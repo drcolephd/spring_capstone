@@ -1,0 +1,14 @@
+include README.md
+include LICENSE*
+include pyproject.toml
+
+recursive-include assets *.png *.ico *.svg
+recursive-include lib *.dll *.lib *.exp *.obj
+recursive-include configurations *.xml *.tsv
+
+prune data
+prune models
+prune MATLAB
+
+global-exclude *.pyc
+global-exclude __pycache__

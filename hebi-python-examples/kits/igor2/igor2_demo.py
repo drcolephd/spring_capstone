@@ -1,0 +1,37 @@
+import os
+import sys
+
+# ------------------------------------------------------------------------------
+# Add the root folder of the repository to the search path for modules
+root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+sys.path = [root_path] + sys.path
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Configuration
+# ------------------------------------------------------------------------------
+
+from components.configuration import Igor2Config
+# Get absolute filename
+config_filename = os.path.join(os.path.dirname(__file__), 'resources/config.yml')
+igor_config = Igor2Config(config_filename)
+
+# ------------------------------------------------------------------------------
+# Running
+# ------------------------------------------------------------------------------
+
+from components.igor import Igor
+
+igor = Igor(config=igor_config)
+keep_running = True
+
+def stop_running_callback(*args):
+  global keep_running
+  keep_running = False
+
+igor.add_on_stop_callback(stop_running_callback)
+igor.start()
+
+from time import sleep
+while keep_running:
+  sleep(1.0)
