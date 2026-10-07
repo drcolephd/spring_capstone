@@ -2,8 +2,20 @@ import serial
 import struct
 import math
 
-PORT = "COM6"
+import serial.tools.list_ports
+
+def find_port(vid=0x1ffb, pid=0x00bb):
+    for p in serial.tools.list_ports.comports():
+        if p.vid == vid and p.pid == pid:
+            return p.device
+    return None
+
+PORT = find_port() or "/dev/ttyACM1"
+#PORT = "/dev/ttyACM0"
 BAUD = 115200
+
+ser = serial.Serial(PORT, BAUD, timeout=1)
+print("Opened:", ser.is_open, ser.name)
 
 def u16_be(b): return (b[0] << 8) | b[1]
 def i16_be(b): return struct.unpack(">h", b)[0]
